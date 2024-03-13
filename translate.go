@@ -11,6 +11,8 @@ import (
 type Response struct {
 	ResponseData struct {
 		TranslatedText string `json:"translatedText"`
+		QuotaFinished bool `json:"quotaFinished"`
+
 	} `json:"responseData"`
 
 	QuotaFinished bool `json:"quotaFinished"`
@@ -49,7 +51,7 @@ func Translate(c Config) (string, error) {
 		return "", err
 	}
 
-	if data.QuotaFinished {
+	if data.QuotaFinished || resp.StatusCode != 200 {
 		return "", fmt.Errorf("Quota finished")
 	}
 

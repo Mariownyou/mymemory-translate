@@ -5,10 +5,10 @@ import (
 )
 
 func TestTranslate(t *testing.T) {
-	config := TranslationConfig{
-		text: "Hello",
-		from: "en",
-		to: "es",
+	config := Config{
+		Text: "Hello",
+		From: "en",
+		To: "es",
 	}
 	translated, err := Translate(config)
 	if err != nil {
@@ -26,11 +26,11 @@ var articles = []string{
 
 func TestTranslateArticles(t *testing.T) {
 	for _, article := range articles {
-		config := TranslationConfig{
-			text: article,
-			from: "en",
-			to: "es",
-			email: "test@gmail.com",
+		config := Config{
+			Text: article,
+			From: "en",
+			To: "es",
+			Email: "test@gmail.com",
 		}
 		translated, err := Translate(config)
 		if err != nil {

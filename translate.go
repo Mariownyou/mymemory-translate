@@ -16,20 +16,20 @@ type Response struct {
 	QuotaFinished bool `json:"quotaFinished"`
 }
 
-type TranslationConfig struct {
-	text  string
-	from  string
-	to    string
-	email string // 10x more translations if you provide an email
+type Config struct {
+	Text  string
+	From  string
+	To    string
+	Email string // 10x more translations if you provide an email
 }
 
-func Translate(tc TranslationConfig) (string, error) {
+func Translate(c Config) (string, error) {
 	params := url.Values{}
-	params.Add("q", tc.text)
-	if tc.email != "" {
-		params.Add("de", tc.email)
+	params.Add("q", c.Text)
+	if c.Email != "" {
+		params.Add("de", c.Email)
 	}
-	params.Add("langpair", fmt.Sprintf("%s|%s", tc.from, tc.to))
+	params.Add("langpair", fmt.Sprintf("%s|%s", c.From, c.To))
 
 	resp, err := http.Get("https://api.mymemory.translated.net/get?" + params.Encode())
 	if err != nil {
